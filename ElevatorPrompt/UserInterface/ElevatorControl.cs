@@ -1,61 +1,59 @@
 ﻿namespace ElevatorPrompt
 {
-    public class ElevatorControl : IElevatorControl
+    public class ElevatorControl
     {
-        private IElevatorControl _elevator1Control;
-        private IElevatorControl _elevator2Control;
+        int option;
+        int nextFloor;
+        int numOfFloors;
+        int currentFloor;
 
-        public ElevatorControl(IElevatorControl elevator1Control, IElevatorControl elevator2Control)
+        private IElevatorInput _elevatorInput;
+        private IDriveControl _driveControl;
+        private IDisplayMessages _displayMessages;
+
+        private IElevator _elevator1;
+        private IElevator _elevator2;
+
+        public ElevatorControl(IElevatorInput elevatorInput, IDriveControl driveControl, IDisplayMessages displayMessages)
         {
-            _elevator1Control = elevator1Control;
-            _elevator2Control = elevator2Control;
-        }
-
-        public void AssignElevator(int nextFloor)
-        {
-
-            _elevator1Control.AssignElevator(nextFloor);
-            _elevator2Control.AssignElevator(nextFloor);
+            _elevatorInput = elevatorInput;
+            _driveControl = driveControl;
+            _displayMessages = displayMessages;
+            _elevator1 = elevator1;
+            _elevator2 = elevator2;
         }
 
         public void Choice()
         {
-            _elevator1Control.Choice();
-            _elevator2Control.Choice();
-        }
-
-
-
-
-
-
-        /*public void Run()
-        {
             Boolean isflag = true;
-            Console.WriteLine("Welcome to Elevator Control System!");
+            this.numOfFloors = _elevatorInput.GetNumOfFloors();
+            this.currentFloor = _elevatorInput.GetCurrentFloor();
 
             while (isflag)
             {
-                Console.WriteLine("Which elevator would you like to use?");
-                string choice = Console.ReadLine();
+                option = _elevatorInput.GetOption();
 
-                switch (choice)
+                switch (option)
                 {
-                    case "1":
-                        _elevator1Control.Choice();
+                    case 1:
+                        nextFloor = _elevatorInput.GetNextFloor();
+
+                        currentFloor = _driveControl.MoveUp(currentFloor, numOfFloors, nextFloor);
                         break;
 
-                    case "2":
-                        _elevator2Control.Choice();
+                    case 2:
+                        nextFloor = _elevatorInput.GetNextFloor();
+
+                        currentFloor = _driveControl.MoveDown(currentFloor, numOfFloors, nextFloor);
                         break;
 
                     default:
-                        Console.WriteLine("Invalid choice. Please choose 1 or 2.");
+                        _displayMessages.DisplayInvalidChoiceMessage();
                         break;
                 }
 
                 var ch = _elevatorInput.GetContinueChoice();
-
+              
                 while (ch != "N" && ch != "Y")
                 {
 
@@ -69,9 +67,5 @@
                 }
             }
         }
-    }*/
     }
 }
-
-        
-
