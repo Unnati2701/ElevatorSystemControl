@@ -1,4 +1,4 @@
-﻿namespace ElevatorPrompt
+﻿namespace ConsoleApp2
 {
     public class DisplayMessages : IDisplayMessages
     {

@@ -1,4 +1,4 @@
-﻿namespace ElevatorPrompt
+﻿namespace ConsoleApp2
 {
     public class ElevatorControl
     {
@@ -11,16 +11,11 @@
         private IDriveControl _driveControl;
         private IDisplayMessages _displayMessages;
 
-        private IElevator _elevator1;
-        private IElevator _elevator2;
-
         public ElevatorControl(IElevatorInput elevatorInput, IDriveControl driveControl, IDisplayMessages displayMessages)
         {
             _elevatorInput = elevatorInput;
             _driveControl = driveControl;
             _displayMessages = displayMessages;
-            _elevator1 = elevator1;
-            _elevator2 = elevator2;
         }
 
         public void Choice()
