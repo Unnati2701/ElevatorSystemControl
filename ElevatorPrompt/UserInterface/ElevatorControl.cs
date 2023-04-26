@@ -12,16 +12,15 @@
         private IDisplayMessages _displayMessages;
         private Elevator[] elevator;
 
-        public ElevatorControl(IElevatorInput elevatorInput, IDriveControl driveControl, IDisplayMessages displayMessages)
+        public ElevatorControl(IElevatorInput elevatorInput, IDriveControl driveControl, IDisplayMessages displayMessages, Elevator[] elevator)
         {
             _elevatorInput = elevatorInput;
             _driveControl = driveControl;
             _displayMessages = displayMessages;
 
-            Elevator[] elevator = new Elevator[2];
+            this.elevator = elevator;
             elevator[0] = new Elevator { id = 1, elevator_Floor = 0 };
             elevator[1] = new Elevator { id = 2, elevator_Floor = 0 };
-            this.elevator = elevator;
         }
 
         public void RequestElevator(int currentFloor)
