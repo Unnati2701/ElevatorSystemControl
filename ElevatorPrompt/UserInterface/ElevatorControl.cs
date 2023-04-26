@@ -19,8 +19,7 @@
             _displayMessages = displayMessages;
 
             this.elevator = elevator;
-            elevator[0] = new Elevator { id = 1, elevator_Floor = 0 };
-            elevator[1] = new Elevator { id = 2, elevator_Floor = 0 };
+            
         }
 
         public void RequestElevator(int currentFloor)
@@ -28,30 +27,31 @@
             Elevator closestElevator = null;
             int minDistance = int.MaxValue;
 
-            foreach(Elevator e in elevator)
+            for(int i = 0; i < elevator.Length; i++)
             {
-                int distance = Math.Abs(e.elevator_Floor - currentFloor);
+                int distance = Math.Abs(elevator[i].elevator_Floor - currentFloor);
                 if (distance < minDistance)
                 {
                     minDistance = distance;
-                    closestElevator = e;
+                    closestElevator = elevator[i];
+                    elevator[i].elevator_Floor = currentFloor;
                 }
             }
 
-            Console.WriteLine("Elevator {0} is coming to floor {1}", closestElevator.id, currentFloor);
             closestElevator.elevator_Floor = currentFloor;
+            Console.WriteLine("Elevator {0} is coming to floor {1}", closestElevator.id, currentFloor);
+            
         }
 
         public void Choice()
         {
             Boolean isflag = true;
             this.numOfFloors = _elevatorInput.GetNumOfFloors();
-            this.currentFloor = _elevatorInput.GetCurrentFloor();
 
             while (isflag)
             {
-                option = _elevatorInput.GetOption();
-
+                this.currentFloor = _elevatorInput.GetCurrentFloor();
+                option = _elevatorInput.GetOption();                
 
                 switch (option)
                 {
