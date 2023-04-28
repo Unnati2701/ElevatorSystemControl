@@ -1,6 +1,4 @@
-﻿using System.Collections.Immutable;
-
-namespace ElevatorPrompt
+﻿namespace ElevatorPrompt
 {
     public class ElevatorControl
     {
